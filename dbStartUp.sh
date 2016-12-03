@@ -1,16 +1,18 @@
 #!/usr/bin/env bash
 
-sudo p /vagrant/*.php /var/www/
-if [ -f /var/www/index.html];
+sudo cp /vagrant/*.php /var/www/
+if [ -f /var/www/index.html ];
 then
    sudo rm /var/www/index.html
 fi
-if [ ! -f /var/log/databasesetup];
+if [ ! -f /var/log/databasesetup ];
 then
-   echo "CREATE DATABASE cpsc471" | mysql -uroot -prootpass
+   mysql -uroot -prootpass -e "CREATE DATABASE cpsc471"
 
-   if [ -f /vagrant/cpsc471.spl ];
+   touch /var/log/databasesetup
+
+   if [ -f /vagrant/cpsc471.sql ];
    then
-      mysql -u root -p rootpass cpsc471 < /vagrant/cpsc471.sql
+      mysql -uroot -prootpass cpsc471 < /vagrant/cpsc471.sql
    fi
 fi
