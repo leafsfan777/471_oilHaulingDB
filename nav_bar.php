@@ -65,11 +65,6 @@ ul.topnav li.icon {display: none;}
   </li>
 </ul>
 
-<div style="padding-left:16px">
-  <h2>User Directions</h2>
-  <p>user directions here</p>
-</div>
-
 <script>
 function myFunction() {
     var x = document.getElementById("myTopnav");

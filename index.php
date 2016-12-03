@@ -9,6 +9,7 @@ Manmeet Dhaliwal
         <title>Hello</title>
     </head>
     <body>
+        <?php include 'nav_bar.php';?>
         <h1>Demo for 471</h1>
         <?php
             // put your code here
