@@ -81,10 +81,6 @@ function responsive_nav_bar_toggle() {
 }
 </script>
 
-<?php
-//Create connection
-$con=mysqli_connect("localhost", "root", "rootpass", 
-
 </body>
 </html>
 

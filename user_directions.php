@@ -55,35 +55,31 @@ ul.topnav li.icon {display: none;}
 </head>
 <body>
 
-<ul class="topnav" id="topNavBar">
+<ul class="topnav" id="myTopnav">
   <li><a class="active" href="index.php">Home</a></li>
   <li><a href="#news">News</a></li>
   <li><a href="#contact">Contact</a></li>
   <li><a href="user_directions.php">About</a></li>
   <li class="icon">
-    <a href="javascript:void(0);" style="font-size:15px;" onclick="responsive_nav_bar_toggle()">=</a>
+    <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">☰</a>
   </li>
 </ul>
 
 <div style="padding-left:16px">
-  <h2>Responsive Topnav Example</h2>
-  <p>Resize the browser window to see how it works.</p>
+  <h2>User Directions</h2>
+  <p>user directions here</p>
 </div>
 
 <script>
-function responsive_nav_bar_toggle() {
-    var navBar = document.getElementById("topNavBar");
-    if (navBar.className === "topnav") {
-        navBar.className += " responsive";
+function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
     } else {
-        navBar.className = "topnav";
+        x.className = "topnav";
     }
 }
 </script>
-
-<?php
-//Create connection
-$con=mysqli_connect("localhost", "root", "rootpass", 
 
 </body>
 </html>
