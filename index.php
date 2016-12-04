@@ -1,18 +1,14 @@
 <!DOCTYPE html>
-<!--
-Manmeet Dhaliwal
-471 Sample project to show connection to local database
--->
 <html>
     <head>
         <meta charset="UTF-8">
         <title>Hello</title>
+        <?php include 'nav_bar.php';?>
     </head>
     <body>
-        <?php include 'nav_bar.php';?>
-        <h1>Demo for 471</h1>
+	<div>
+	<form action="retrieval_info.php" method="get">
         <?php
-            // put your code here
             $servername = "localhost";          //should be same for you
             $username = "root";                 //same here
             $password = "rootpass";             //your localhost root password
@@ -25,22 +21,35 @@ Manmeet Dhaliwal
             }else{
                 echo "Connected<br>";
             }
-            
-            //sql query
-            $sql = "SELECT * FROM tickets";
-            echo "<br><br>Printing ticket numbers in the (tickets) table in the (ticket number) column:<br>";
+
+            //populate company selector
+            echo 'Company: <select name="companySelector"> <br>';
+            $sql = "SELECT Name FROM company";
             $result = $conn->query($sql);       //execute the query
-            
             if($result->num_rows > 0){           //check if query results in more than 0 rows
-                echo "query successful";                
+                echo '<option value="none" selected="selected">---SELECT---</option>';                
                 while($row = mysqli_fetch_array($result)){   //loop until all rows in result are fetched
-                    echo "Ticket_no: ".$row["Ticket_no"]."<br>"; //here we are looking at one row, and printing the value in "names" column
+                    echo '<option value="'.$row[0].'">'.$row[0].'</option>';
                 }
+	    echo '</select>';
             }else{
              echo "no records retrieved";
-}
+	    }
+	    $conn-> close();            //close the connection to database
+             
+	    //company as selector
+    	    echo' as: <select name="companyAs"><br>';
+            echo'<option value="none">---SELECT---</option>';
+	    echo'<option value="owner">Owner</option>';
+	    echo'<option value="hauler">Hauler</option>';
+	    echo'</select>';
+            echo'<input type="submit" value="Submit">';
             
-            $conn-> close();            //close the connection to database
-        ?>
+	    
+	    
+
+	?>
+	</form>
+	</div>    
     </body>
 </html>
