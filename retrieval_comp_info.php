@@ -3,7 +3,7 @@
 	<head>
 	   <meta charset="UTF-8">
            <title>Hello</title>
-	   <?php include 'index.php';?>
+	   <?php include 'retrieval_comp.php';?>
 	</head>
 <body>
 	<?php

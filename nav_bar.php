@@ -57,9 +57,10 @@ ul.topnav li.icon {display: none;}
 
 <ul class="topnav" id="myTopnav">
   <li><a class="active" href="index.php">Home</a></li>
-  <li><a href="#news">News</a></li>
+  <li><a href="retrieval_comp.php">Retrieval By Company</a></li>
+  <li><a href="ticket_insertion.php">Create New Ticket</a></li>
   <li><a href="#contact">Contact</a></li>
-  <li><a href="user_directions.php">About</a></li>
+  <li><a href="user_directions.php">How to Use</a></li>
   <li class="icon">
     <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">☰</a>
   </li>
