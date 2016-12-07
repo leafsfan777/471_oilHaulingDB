@@ -12,17 +12,17 @@
 	    font-size:11px;
 	    padding:4px 2px;
 	    border:solid 1px #aacfe4;
-	    width:70px;
+	    width:100px;
 	    margin:2px 0 20px 10px;
 	}
 	</style>        
 	
 	<div id="stylized">
         <form name="insert_form" method="post" action="ticket_insertion.php">
-		Weigh In: <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></input>
-		Weigh Out: <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></input>
-		Date: <input type="date"></input>
-		Time: <input type="time"></input>
+		Weigh In: <input type="text" name ="Weigh_in" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></input>
+		Weigh Out: <input type="text" name ="Weigh_out" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></input>
+		Date: <input type="date" name ="date"></input>
+		Time: <input type="time" name ="time"></input>
         <?php
             $servername = "localhost";          //should be same for you
             $username = "root";                 //same here
@@ -36,10 +36,11 @@
             }else{
                 echo "Connected<br>";
             }
+				
             echo 'Product Hauled: <select name="product_hauled_selctor"> <br>';
             $sql = "SELECT Description, Product_no FROM products";
-            $result = $conn->query($sql);       //execute the query
-            if($result->num_rows > 0){           //check if query results in more than 0 rows
+            $result = $conn->query($sql);											//execute the query
+            if($result->num_rows > 0){												//check if query results in more than 0 rows
                 echo '<option value="none" selected="selected">---SELECT---</option>';
                 while($row = mysqli_fetch_array($result)){   //loop until all rows in result are fetched
                     echo '<option value="'.$row["Product_no"].'">'.$row["Description"].'</option>';
@@ -89,11 +90,29 @@
                     echo '<option value="'.$row["Location_id"].'">'.$row["Name"].'</option>';
                 }
             }
-            echo '</select><br>';            
+			echo '</select><br>';
+			     
+			$weigh_in = $_POST["Weigh_in"];
+			$weigh_out = $_POST["Weigh_out"];
+			$date = $_POST["date"];
+			$time = $_POST["time"];
+			$company=$_POST["companySelector"];
+			$truck = $_POST["hauling_truck_selector"];
+			$hauled_from=$_POST["hauled_from_selector"];
+			$hauled_to=$_POST["hauled_to_selector"];
+			$product = $_POST["product_hauled_selector"];
 
+			$sql= "INSERT INTO tickets
+				(Weigh_in, Weigh_out, Date, Time, Product_Hauled, Hauling_Truck, Owned_by, Hauled_from, Hauled_to)
+				VALUES
+				('.$weigh_in.', '.$weigh_out.', '.$date.', '.$time.','.$product.', '.$truck.', '.$company.', '.$hauled_from.', '.$hauled_to.')";       
+			
+			$result = $conn->query($sql);
 
+			echo'<input type="submit" value="Submit">';
 
-         
+			$conn->close();
+
 ?>
 </form>
 </div>
