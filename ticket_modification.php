@@ -64,18 +64,22 @@
         	        $date=NULL;
 			$ok_to_modify = true;
                 }elseif($date!=NULL && $ok_to_modify){
-                        if(($date = strtotime($date))==true){
-                                $ok_to_modify=TRUE;
-                        }else{
-                                echo '<br>date must be a valid date<br>';
+				echo "check";
+				$dateParsed = DateTime::createFromFormat('Y-m-d', $date);
+				echo "successful";
+				$ok_to_modify=TRUE;
+			if($dateParsed == null){
+                                echo '<br>date must be a valid date in format yyyy-mm-dd<br>';
                                 $ok_to_modify=FALSE;
         		}
                 }
+		echo "test";
                 if($time==$no_value && $ok_to_modify) {
-                        $time=NULL;
+                        echo "check2";
+			$time=NULL;
                         $ok_to_modify = true;
                 }elseif($time!=NULL && $ok_to_modify){
-                        if(($time = strtotime($time))==true){
+                        if(strtotime($time)==true){
                                $ok_to_modify=TRUE;
                         }else{
                                echo '<br>time must be a valid time<br>';
@@ -134,9 +138,9 @@
 				$conn->query($sql_weigh_out);
                         }
                         if($date!=NULL){
-                                $sql_date = 'UPDATE tickets
-                                                 SET Date='.$date.'
-                                                 WHERE Ticket_no='.$ticket_no;
+                                $sql_date = "UPDATE tickets
+                                             SET Date='".$date."'
+                                             WHERE Ticket_no=".$ticket_no;
 				$conn->query($sql_date);
                         }
                         if($time!=NULL){
