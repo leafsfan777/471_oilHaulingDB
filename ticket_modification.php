@@ -144,9 +144,9 @@
 				$conn->query($sql_date);
                         }
                         if($time!=NULL){
-                                $sql_time = 'UPDATE tickets
-                                                 SET Time='.$time.'
-                                                 WHERE Ticket_no='.$ticket_no;
+                                $sql_time = "UPDATE tickets
+                                                 SET Time='".$time."'
+                                                 WHERE Ticket_no=".$ticket_no;
 				$conn->query($sql_time);
                         }
                         if($product_hauled!=NULL){
@@ -155,9 +155,9 @@
                                                  WHERE Ticket_no='.$ticket_no;
 				$conn->query($sql_product_hauled);
                         }
-                        if($hauling_truck!=NULL){
-                                $sql_hauling_truck = 'UPDATE tickets
-                                                 SET Hauling_Truck='.$Hauling_Truck.'
+                        if($hauling_truck!=NULL){                                
+				$sql_hauling_truck = 'UPDATE tickets
+                                                 SET Hauling_Truck='.$hauling_truck.'
                                                  WHERE Ticket_no='.$ticket_no;
                         	$conn->query($sql_hauling_truck);
 			}
@@ -212,7 +212,7 @@
             
 echo 'Weigh In: <input type="text" name="weigh_in_selector" onkeypress="return event.charCode >= 48 && event.charCode <= 57"></input>';
 echo 'Weigh Out: <input type="text" name="weigh_out_selector" onkeypress="return event.charCode >= 48 && event.charCode <= 57"></input>';
-echo 'Date: <input type="date" name="date_selector"></input>';
+echo 'Date: <input type="text" name="date_selector"></input>';
 echo 'Time: <input type="time" name="time_selector"></input>';
 
 	    echo 'Product Hauled: <select name="product_hauled_selctor"> <br>';

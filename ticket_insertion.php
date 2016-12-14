@@ -37,7 +37,7 @@
                 echo "Connected<br>";
             }
 				
-            echo 'Product Hauled: <select name="product_hauled_selctor"> <br>';
+            echo 'Product Hauled: <select name="product_hauled_selector"> <br>';
             $sql = "SELECT Description, Product_no FROM products";
             $result = $conn->query($sql);											//execute the query
             if($result->num_rows > 0){												//check if query results in more than 0 rows
@@ -92,6 +92,8 @@
             }
 			echo '</select><br>';
 			     
+			echo'<input type="submit" value="Submit">';
+			
 			$weigh_in = $_POST["Weigh_in"];
 			$weigh_out = $_POST["Weigh_out"];
 			$date = $_POST["date"];
@@ -100,16 +102,17 @@
 			$truck = $_POST["hauling_truck_selector"];
 			$hauled_from=$_POST["hauled_from_selector"];
 			$hauled_to=$_POST["hauled_to_selector"];
-			$product = $_POST["product_hauled_selector"];
+			$product = $_POST["product_hauled_selector"]; 
 
 			$sql= "INSERT INTO tickets
 				(Weigh_in, Weigh_out, Date, Time, Product_Hauled, Hauling_Truck, Owned_by, Hauled_from, Hauled_to)
 				VALUES
-				('.$weigh_in.', '.$weigh_out.', '.$date.', '.$time.','.$product.', '.$truck.', '.$company.', '.$hauled_from.', '.$hauled_to.')";       
+				('".$weigh_in."', '".$weigh_out."', '".$date."', '".$time."','".$product."', '".$truck."', '".$company."', '".$hauled_from."', '".$hauled_to."')";       
 			
+			echo $sql;
 			$result = $conn->query($sql);
 
-			echo'<input type="submit" value="Submit">';
+
 
 			$conn->close();
 
