@@ -27,7 +27,7 @@ ul.topnav li a:hover {background-color: #555;}
 
 ul.topnav li.icon {display: none;}
 
-@media screen and (max-width:680px) {
+@media screen and (max-width:800px) {
   ul.topnav li:not(:first-child) {display: none;}
   ul.topnav li.icon {
     float: right;
@@ -35,7 +35,7 @@ ul.topnav li.icon {display: none;}
   }
 }
 
-@media screen and (max-width:680px) {
+@media screen and (max-width:800px) {
   ul.topnav.responsive {position: relative;}
   ul.topnav.responsive li.icon {
     position: absolute;
@@ -57,18 +57,15 @@ ul.topnav li.icon {display: none;}
 
 <ul class="topnav" id="myTopnav">
   <li><a class="active" href="index.php">Home</a></li>
-  <li><a href="#news">News</a></li>
-  <li><a href="#contact">Contact</a></li>
-  <li><a href="user_directions.php">About</a></li>
+  <li><a href="retrieval_comp.php">Retrieval By Company</a></li>
+  <li><a href="retrieval_location.php">Retrieval By Location</a></li>
+  <li><a href="ticket_insertion.php">Create New Ticket</a></li>
+  <li><a href="ticket_modification.php">Modify Tickets</a></li>
+  <li><a href="violations.php">Violations</a></li>
   <li class="icon">
     <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">☰</a>
   </li>
 </ul>
-
-<div style="padding-left:16px">
-  <h2>User Directions</h2>
-  <p>user directions here</p>
-</div>
 
 <script>
 function myFunction() {

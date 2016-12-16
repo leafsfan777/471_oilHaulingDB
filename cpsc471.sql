@@ -111,14 +111,17 @@ CREATE TABLE `trucks` (
   `Capacity(L)` int(11) DEFAULT NULL,
   `Sour_hauler` binary(1) NOT NULL DEFAULT '\0',
   `Winter_only` binary(1) NOT NULL DEFAULT '\0',
-  PRIMARY KEY (`VIN`)
+  `Owned_by` int(11),
+  PRIMARY KEY (`VIN`),
+  KEY `Owner` (`Owned_by`),
+  CONSTRAINT `Owner` FOREIGN KEY (`Owned_by`) REFERENCES `company` (`Company_id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # Data for table "trucks"
 #
 
-INSERT INTO `trucks` VALUES (100456,14750,'4A-AWD-8W',1875,X'31',X'31'),(100654,12480,'3A-RWD-6W',1490,X'31',X'30'),(100789,15000,'4A-AWD-10W',2000,X'30',X'31'),(100987,13800,'3A-AWD-6W',1500,X'30',X'30');
+INSERT INTO `trucks` VALUES (100456,14750,'4A-AWD-8W',1875,X'31',X'31',123456),(100654,12480,'3A-RWD-6W',1490,X'31',X'30',123456),(100789,15000,'4A-AWD-10W',2000,X'30',X'31',123456),(100987,13800,'3A-AWD-6W',1500,X'30',X'30',123456);
 
 #
 # Structure for table "tickets"
