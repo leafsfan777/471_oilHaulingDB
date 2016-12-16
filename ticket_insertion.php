@@ -2,8 +2,9 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Hello</title>
+        <title>Oil Hauls Ticket Tracking System - New Ticket</title>
         <?php include 'nav_bar.php';?>
+	<h1>Create New Ticket</h1>
     </head>
     <body>
 	<style>
@@ -21,20 +22,18 @@
         <form name="insert_form" method="post" action="ticket_insertion.php">
 		Weigh In: <input type="text" name ="Weigh_in" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></input>
 		Weigh Out: <input type="text" name ="Weigh_out" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></input>
-		Date: <input type="date" name ="date"></input>
+		Date: <input type="text" name ="date"></input>
 		Time: <input type="time" name ="time"></input>
         <?php
-            $servername = "localhost";          //should be same for you
-            $username = "root";                 //same here
-            $password = "rootpass";             //your localhost root password
-            $db = "cpsc471";                     //your database name
+            $servername = "localhost";         
+            $username = "root";                 
+            $password = "rootpass";            
+            $db = "cpsc471";                  
 
             $conn = new mysqli($servername, $username, $password, $db);
 
             if($conn->connect_error){
                 die("Connection failed".$conn->connect_error);
-            }else{
-                echo "Connected<br>";
             }
 				
             echo 'Product Hauled: <select name="product_hauled_selector"> <br>';
@@ -93,7 +92,12 @@
 			echo '</select><br>';
 			     
 			echo'<input type="submit" value="Submit">';
-			
+			$submitted = NULL;
+			if (!empty($_POST)){
+				$submitted=true;
+			}else{
+				$submitted=false;
+			}	
 			$weigh_in = $_POST["Weigh_in"];
 			$weigh_out = $_POST["Weigh_out"];
 			$date = $_POST["date"];
@@ -103,19 +107,39 @@
 			$hauled_from=$_POST["hauled_from_selector"];
 			$hauled_to=$_POST["hauled_to_selector"];
 			$product = $_POST["product_hauled_selector"]; 
-
-			$sql= "INSERT INTO tickets
-				(Weigh_in, Weigh_out, Date, Time, Product_Hauled, Hauling_Truck, Owned_by, Hauled_from, Hauled_to)
-				VALUES
-				('".$weigh_in."', '".$weigh_out."', '".$date."', '".$time."','".$product."', '".$truck."', '".$company."', '".$hauled_from."', '".$hauled_to."')";       
+		
+			if($submitted!=false){
+			$dateParsed = DateTime::createFromFormat('Y-m-d', $date);
+			if($dateParsed == null){
+				echo 'date must be a valid date in format yyyy-mm-dd. Please try again <br>';
+				$date='';
+			}
+			if(strtotime($time)==false){
+				echo 'time is not a valid time. Please try again <br>';
+				$time='';
+			}
+			if(!is_numeric($weigh_in)){
+				echo 'weigh in must be an integer <br>';
+				$weigh_in='';
+			}
+			if(!is_numeric($weigh_out)){
+                                echo 'weigh out must be an integer <br>';
+                                $weigh_out='';
+                        }
+			}
+					
+			if ($submitted!=false && ($weigh_in=='' || $weigh_out =='' || $date=='' || $time=='' || $company=='none' || $truck=='none' || $hauled_from=='none' || $hauled_to=='none' || $product=='none')) {
+				echo "you must enter a value valid in each section in order to insert a ticket. Please try again ensuring all values are properly formatted and entered.<br>";
+			}elseif($submitted!=false){
+				$sql= "INSERT INTO tickets
+					(Weigh_in, Weigh_out, Date, Time, Product_Hauled, Hauling_Truck, Owned_by, Hauled_from, Hauled_to)
+					VALUES
+					('".$weigh_in."', '".$weigh_out."', '".$date."', '".$time."','".$product."', '".$truck."', '".$company."', '".$hauled_from."', '".$hauled_to."')";       
 			
-			echo $sql;
-			$result = $conn->query($sql);
-
-
-
+				$result = $conn->query($sql);
+				echo "Insertion Complete";
+			}	
 			$conn->close();
-
 ?>
 </form>
 </div>

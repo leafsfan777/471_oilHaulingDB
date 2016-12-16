@@ -2,24 +2,22 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Hello</title>
+        <title>Oil Hauls Ticketing System - Retrieval by Company</title>
         <?php include 'nav_bar.php';?>
     </head>
     <body>
 	<div>
 	<form action="retrieval_comp_info.php" method="get">
         <?php
-            $servername = "localhost";          //should be same for you
-            $username = "root";                 //same here
-            $password = "rootpass";             //your localhost root password
-            $db = "cpsc471";                     //your database name
+            $servername = "localhost";          //connect to database server
+            $username = "root";                 //as root
+            $password = "rootpass";             //password for root user
+            $db = "cpsc471";                    
             
             $conn = new mysqli($servername, $username, $password, $db);
             
             if($conn->connect_error){
                 die("Connection failed".$conn->connect_error);
-            }else{
-                echo "Connected<br>";
             }
 
             //populate company selector

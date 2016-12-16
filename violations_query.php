@@ -1,24 +1,22 @@
 <html>
         <head>
            <meta charset="UTF-8">
-           <title>Hello</title>
-           <?php include 'nav_bar.php';?>
+           <title>Oil Hauls Ticketing System - Sour Violations</title>
+           <?php include 'violations.php';?>
         </head>
 <body>
         <?php
-           $servername = "localhost";          //should be same for you
-           $username = "root";                 //same here
-           $password = "rootpass";             //your localhost root password
-           $db = "cpsc471";                     //your database name
+           $servername = "localhost";         
+           $username = "root";               
+           $password = "rootpass";          
+           $db = "cpsc471";               
 
            $conn = new mysqli($servername, $username, $password, $db);
 
            if($conn->connect_error){
               die("Connection failed".$conn->connect_error);
-           }else{
-              echo "Connected<br>";
            }
-
+		
 		$result=NULL;
 		$type=$_GET["violation_selector"];
 		if($type=='none'){
@@ -72,6 +70,7 @@ $sql="SELECT t.Ticket_no, t.Weigh_in, t.Weigh_out, t.Date, t.Time, t.Product_Hau
                    }
 		echo '</table>';
 		}
+		$conn->close();
 ?>
 </body>
 </html>

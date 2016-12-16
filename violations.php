@@ -1,7 +1,7 @@
 <html>
         <head>
            <meta charset="UTF-8">
-           <title>Hello</title>
+           <title>Oil Hauls Ticketing System - Sour Violations</title>
            <?php include 'nav_bar.php';?>
         </head>
 <body>

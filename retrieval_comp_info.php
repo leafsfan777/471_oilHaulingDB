@@ -2,28 +2,24 @@
 <html>
 	<head>
 	   <meta charset="UTF-8">
-           <title>Hello</title>
+           <title>Oil Hauls Ticketing System - Retrieval by Company</title>
 	   <?php include 'retrieval_comp.php';?>
 	</head>
 <body>
 	<?php
-	   $servername = "localhost";          //should be same for you
-           $username = "root";                 //same here
-           $password = "rootpass";             //your localhost root password
-           $db = "cpsc471";                     //your database name
+	   $servername = "localhost";          
+           $username = "root";                
+           $password = "rootpass";            
+           $db = "cpsc471";                  
             
            $conn = new mysqli($servername, $username, $password, $db);
             
            if($conn->connect_error){
               die("Connection failed".$conn->connect_error);
-           }else{
-              echo "Connected<br>";
            }
 	   
 	   $company=$_GET["companySelector"];
 	   $companyAs=$_GET["companyAs"];
-	echo $company;
-	echo $companyAs;	   
 	if($company!='none' and $companyAs=='none') {
 	     echo'Malformed query, must select whether you want tickets with company as owner or as hauler'; 	   
 	   }else{
@@ -31,7 +27,6 @@
 		$sql = "SELECT * FROM tickets WHERE Owned_by=(SELECT Company_id FROM company WHERE Name='".$company."')";
 		$result = $conn->query($sql);
 		if($result->num_rows > 0){
-		   echo'check2';
 		   echo'<table style="width:100%">';
 		   echo'<tr>';
 		   echo'<th>Ticket Number</th>';

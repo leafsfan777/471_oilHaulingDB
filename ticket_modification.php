@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Hello</title>
+        <title>Oil Hauls Ticketing System - Ticket Modification</title>
         <?php include 'nav_bar.php';?>
     </head>
     <body>
@@ -30,13 +30,12 @@
 		$owned_by = $_POST['companySelector'];
 		$hauled_from = $_POST['hauled_from_selector'];
 		$hauled_to = $_POST['hauled_to_selector'];
-		echo $ticket_no." ".$weigh_in." ".$weigh_out." ".$date." ".$time." ".$product_hauled." ".$hauling_truck." ".$owned_by." ".$hauled_from." ".$hauled_to;
 
 		if($ticket_no==$no_value) {
 			echo '<br>You must select a ticket to modify<br>';
 			$ok_to_modify=FALSE;
 		}elseif($ticket_no!=NULL){$ok_to_modify=true;}			
-		if($weigh_in==$no_value && $ok_to_modify) {
+		if($weigh_in=='' && $ok_to_modify) {
 			$weigh_in=NULL;
 			$ok_to_modify=TRUE;
 		}elseif($weigh_in!=NULL && $ok_to_modify){
@@ -48,7 +47,7 @@
 				$ok_to_modify=FALSE;
 			}
 		}
-		if($weigh_out==$no_value && $ok_to_modify) {
+		if($weigh_out=='' && $ok_to_modify) {
                         $weigh_out=NULL;
 			$ok_to_modify=TRUE;
                 }elseif($weigh_out!=NULL && $ok_to_modify){
@@ -60,22 +59,18 @@
 				$ok_to_modify=FALSE;
 			}
                 }
-		if($date==$no_value && $ok_to_modify) {
+		if($date=='' && $ok_to_modify) {
         	        $date=NULL;
 			$ok_to_modify = true;
                 }elseif($date!=NULL && $ok_to_modify){
-				echo "check";
 				$dateParsed = DateTime::createFromFormat('Y-m-d', $date);
-				echo "successful";
 				$ok_to_modify=TRUE;
 			if($dateParsed == null){
                                 echo '<br>date must be a valid date in format yyyy-mm-dd<br>';
                                 $ok_to_modify=FALSE;
         		}
                 }
-		echo "test";
-                if($time==$no_value && $ok_to_modify) {
-                        echo "check2";
+                if($time=='' && $ok_to_modify) {
 			$time=NULL;
                         $ok_to_modify = true;
                 }elseif($time!=NULL && $ok_to_modify){
@@ -107,23 +102,20 @@
                         $ok_to_modify = true;
                 }
 		if($ok_to_modify){
-			echo 'true';
 			modify_tickets($ticket_no, $weigh_in, $weigh_out, $date, $time, $product_hauled, $hauling_truck, $owned_by, $hauled_from, $hauled_to);	
-		}else{echo 'false';}
+		}
 		
 		function modify_tickets($ticket_no, $weigh_in, $weigh_out, $date, $time, $product_hauled, $hauling_truck, $owned_by, $hauled_from, $hauled_to) {
-			$servername = "localhost";          //should be same for you
-        		$username = "root";                 //same here
-        		$password = "rootpass";             //your localhost root password
-       			$db = "cpsc471";                     //your database name
+			$servername = "localhost";          
+        		$username = "root";                
+        		$password = "rootpass";           
+       			$db = "cpsc471";                 
 		
 		        $conn = new mysqli($servername, $username, $password, $db);
 
         		if($conn->connect_error){
 		            die("Connection failed".$conn->connect_error);
-		        }else{
-		            echo "Connected<br>";
-            		}
+		        }
 			
 			if($weigh_in!=NULL){
 				$sql_weigh_in = 'UPDATE tickets
@@ -187,17 +179,15 @@
         <h3>To modify a ticket, first choose the ticket number you wish to modify. Then choose the value for each field you wish to modify. If you leave a field blank it will be left as it was.</h3>
 	<form name="insert_form" action="" method="post">
         <?php
-            $servername = "localhost";          //should be same for you
-            $username = "root";                 //same here
-            $password = "rootpass";             //your localhost root password
-            $db = "cpsc471";                     //your database name
+            $servername = "localhost";          
+            $username = "root";                
+            $password = "rootpass";           
+            $db = "cpsc471";                 
 
             $conn = new mysqli($servername, $username, $password, $db);
 
             if($conn->connect_error){
                 die("Connection failed".$conn->connect_error);
-            }else{
-                echo "Connected<br>";
             }
             echo 'Ticket to Modify: <select name="Ticket_no_selector"> <br>';
             $sql = "SELECT Ticket_no FROM tickets";

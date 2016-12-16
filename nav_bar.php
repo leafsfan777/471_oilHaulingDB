@@ -62,7 +62,6 @@ ul.topnav li.icon {display: none;}
   <li><a href="ticket_insertion.php">Create New Ticket</a></li>
   <li><a href="ticket_modification.php">Modify Tickets</a></li>
   <li><a href="violations.php">Violations</a></li>
-  <li><a href="user_directions.php">How to Use</a></li>
   <li class="icon">
     <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">☰</a>
   </li>
